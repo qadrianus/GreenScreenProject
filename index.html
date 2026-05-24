@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,11 @@
           <span aria-hidden="true"></span>
         </a>
         <ul class="course-nav__list">
-          <li><a class="course-nav__link course-nav__link--active" href="#">Content</a></li>
+          <li>
+            <a class="course-nav__link course-nav__link--active" href="#"
+              >Content</a
+            >
+          </li>
           <li><a class="course-nav__link" href="#">Announcement</a></li>
           <li><a class="course-nav__link" href="#">Discussions</a></li>
           <li><a class="course-nav__link" href="#">Gradebook</a></li>
@@ -30,8 +34,9 @@
 
       <section class="course-hero" aria-labelledby="course-title">
         <div class="course-hero__inner">
-          <h1 id="course-title">Design Computing Studio 1 - Interactive Technology (St Lucia)</h1>
-          <p>DECO7180_7620_22284</p>
+          <h1 id="course-title">
+            Design Computing Studio 1 - Interactive Technology
+          </h1>
         </div>
       </section>
     </header>
@@ -51,7 +56,10 @@
                   aria-controls="resources-panel"
                 >
                   <span class="resource-title">
-                    <span class="resource-title__icon" aria-hidden="true"></span>
+                    <span
+                      class="resource-title__icon"
+                      aria-hidden="true"
+                    ></span>
                     <span>
                       Resources
                       <small>Course profile</small>
@@ -60,10 +68,19 @@
                   <span class="accordion__icon" aria-hidden="true"></span>
                 </button>
               </h3>
-              <div class="accordion__panel" id="resources-panel" role="region" aria-labelledby="resources-title" hidden>
+              <div
+                class="accordion__panel"
+                id="resources-panel"
+                role="region"
+                aria-labelledby="resources-title"
+                hidden
+              >
                 <ul class="item-list">
                   <li class="course-item">
-                    <span class="course-item__icon course-item__icon--document" aria-hidden="true"></span>
+                    <span
+                      class="course-item__icon course-item__icon--document"
+                      aria-hidden="true"
+                    ></span>
                     <span class="course-item__title">Course profile</span>
                   </li>
                 </ul>
@@ -85,70 +102,7 @@
 
               <section class="todo" aria-labelledby="todo-title">
                 <h3 id="todo-title">To-do</h3>
-                <ul class="todo__list">
-                  <li class="todo-card" data-todo-id="problem-framing-report-1" data-assessment-id="problem-framing-report">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=problem-framing-report">
-                      <strong>Problem Framing Report</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--urgent">1 day left</span>
-                  </li>
-                  <li class="todo-card" data-todo-id="problem-framing-report-2" data-assessment-id="problem-framing-report">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=problem-framing-report">
-                      <strong>Problem Framing Report</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--urgent">3 days left</span>
-                  </li>
-                  <li class="todo-card" data-todo-id="mvp-iteration-3-1" data-assessment-id="mvp-iteration-3">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=mvp-iteration-3">
-                      <strong>MVP - Iteration 3</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--warning">7 days left</span>
-                  </li>
-                  <li class="todo-card" data-todo-id="mvp-iteration-3-2" data-assessment-id="mvp-iteration-3">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=mvp-iteration-3">
-                      <strong>MVP - Iteration 3</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--info">12 days left</span>
-                  </li>
-                  <li class="todo-card" data-todo-id="mvp-iteration-3-3" data-assessment-id="mvp-iteration-3">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=mvp-iteration-3">
-                      <strong>MVP - Iteration 3</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--info">15 days left</span>
-                  </li>
-                  <li class="todo-card" data-todo-id="mvp-iteration-3-4" data-assessment-id="mvp-iteration-3">
-                    <span class="todo-card__status" aria-hidden="true"></span>
-                    <a class="todo-card__content" href="assessment.html?id=mvp-iteration-3">
-                      <strong>MVP - Iteration 3</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                    <span class="badge badge--info">20 days left</span>
-                  </li>
-                  <li class="todo-card todo-card--complete" data-todo-id="weekly-design-rationale-1" data-assessment-id="weekly-design-rationale">
-                    <span class="todo-card__status" aria-label="Completed"></span>
-                    <a class="todo-card__content" href="assessment.html?id=weekly-design-rationale">
-                      <strong>Weekly Design Rationale</strong>
-                      <span>Due Week 8</span>
-                      <span>April 12 2026, 14.00</span>
-                    </a>
-                  </li>
-                </ul>
+                <ul class="todo__list" data-component="todo-list"></ul>
               </section>
             </div>
           </aside>

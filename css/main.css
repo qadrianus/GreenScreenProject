@@ -13,6 +13,7 @@
 @import url("components/_calendar.css");
 @import url("components/_submission-upload.css");
 @import url("components/_todo.css");
+@import url("components/_toast.css");
 @import url("components/_action-bar.css");
 @import url("pages/_index.css");
 @import url("pages/_assessment.css");

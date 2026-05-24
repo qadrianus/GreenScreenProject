@@ -40,21 +40,11 @@
 .upload-dropzone__icon {
   width: 1.8rem;
   height: 1.8rem;
-  border-bottom: 0.25rem solid var(--color-primary);
-  border-radius: 0.15rem;
-  position: relative;
-}
-
-.upload-dropzone__icon::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0.1rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  border-left: 0.25rem solid var(--color-primary);
-  border-top: 0.25rem solid var(--color-primary);
-  transform: translateX(-50%) rotate(45deg);
+  background-color: var(--color-primary);
+  mask-image: url("../../assets/icons/cloud-arrow-up.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
 }
 
 .upload-dropzone__text {

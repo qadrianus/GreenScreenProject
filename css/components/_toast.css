@@ -1,0 +1,28 @@
+.toast {
+  position: fixed;
+  top: 5.5rem;
+  left: 50%;
+  z-index: 20;
+  max-width: min(90vw, 28rem);
+  padding: 0.875rem 1rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  font-weight: 600;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast--closing {
+  opacity: 0;
+  transform: translate(-50%, -0.5rem);
+}
+
+@media (max-width: 48rem) {
+  .toast {
+    top: 4.75rem;
+  }
+}

@@ -1,4 +1,5 @@
 import { markAssessmentComplete } from "./completion-store.js";
+import { queueToast } from "./toast.js";
 
 export function initAssessmentSubmission() {
   const submitButton = document.querySelector("[data-submit-assessment]");
@@ -19,6 +20,7 @@ export function initAssessmentSubmission() {
     }
 
     markAssessmentComplete(assessmentId);
+    queueToast("Assessment submitted successfully.");
     window.location.href = "index.html";
   });
 }

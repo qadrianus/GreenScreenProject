@@ -1,4 +1,6 @@
 import { assessments } from "../data/assessments.js";
+import { formatAssessmentDate, formatAttempts, formatMarks, getDueBadge } from "./assessment-format.js";
+import { isAssessmentComplete } from "./completion-store.js";
 
 export function renderAssessmentPage() {
   const page = document.querySelector('[data-component="assessment-page"]');
@@ -122,6 +124,8 @@ function renderSubmission() {
 }
 
 function renderDetails(assessment) {
+  const dueBadge = getDueBadge(assessment, isAssessmentComplete(assessment.id));
+
   return `
     <aside class="assignment-details" aria-labelledby="assignment-details-title">
       <h2 id="assignment-details-title">Assignment Details</h2>
@@ -132,8 +136,8 @@ function renderDetails(assessment) {
             Due
           </dt>
           <dd>
-            <span>${escapeHtml(assessment.due)}</span>
-            <span class="badge badge--${escapeHtml(assessment.badgeType)}">${escapeHtml(assessment.badge)}</span>
+            <span>${escapeHtml(formatAssessmentDate(assessment.dueDate))}</span>
+            <span class="badge badge--${escapeHtml(dueBadge.type)}">${escapeHtml(dueBadge.label)}</span>
           </dd>
         </div>
         <div class="assignment-details__item">
@@ -141,14 +145,14 @@ function renderDetails(assessment) {
             <span class="assignment-details__icon assignment-details__icon--attempts" aria-hidden="true"></span>
             Attempts
           </dt>
-          <dd>${escapeHtml(assessment.attempts)}</dd>
+          <dd>${escapeHtml(formatAttempts(assessment))}</dd>
         </div>
         <div class="assignment-details__item">
           <dt>
             <span class="assignment-details__icon assignment-details__icon--marks" aria-hidden="true"></span>
             Total Marks
           </dt>
-          <dd>${escapeHtml(assessment.marks)}</dd>
+          <dd>${escapeHtml(formatMarks(assessment))}</dd>
         </div>
       </dl>
     </aside>

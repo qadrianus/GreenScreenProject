@@ -1,4 +1,7 @@
+import { assessments } from "../data/assessments.js";
 import { weeks } from "../data/weeks.js";
+import { formatAssessmentDate, getDueBadge } from "./assessment-format.js";
+import { isAssessmentComplete } from "./completion-store.js";
 
 export function renderWeeks() {
   const weeksMount = document.querySelector('[data-component="weeks"]');
@@ -51,7 +54,11 @@ function renderWeek(week) {
 }
 
 function renderAssessments(week) {
-  if (!week.assessments.length) {
+  const weekAssessments = assessments
+    .filter((assessment) => assessment.week === week.number)
+    .sort(compareAssessmentsByDueDate);
+
+  if (!weekAssessments.length) {
     return "";
   }
 
@@ -59,16 +66,17 @@ function renderAssessments(week) {
     <section class="content-section" aria-labelledby="week-${week.number}-assessments">
       <h4 id="week-${week.number}-assessments">Assessments</h4>
       <ul class="item-list">
-        ${week.assessments.map(renderAssessment).join("")}
+        ${weekAssessments.map(renderAssessment).join("")}
       </ul>
     </section>
   `;
 }
 
 function renderAssessment(item) {
-  const badgeType = item.completed ? "success" : item.badgeType || "info";
-  const badge = item.completed ? "Completed" : item.badge;
-  const completeClass = item.completed ? " course-item--complete" : "";
+  const isComplete = item.completed || isAssessmentComplete(item.id);
+  const dueBadge = getDueBadge(item, isComplete);
+  const originalDueBadge = getDueBadge({ ...item, completed: false }, false);
+  const completeClass = isComplete ? " course-item--complete" : "";
   const taskId = item.id ? ` data-task-id="${escapeHtml(item.id)}"` : "";
   const href = item.id ? `assessment.html?id=${encodeURIComponent(item.id)}` : "#";
 
@@ -76,19 +84,19 @@ function renderAssessment(item) {
     <li
       class="course-item course-item--assessment${completeClass}"
       ${taskId}
-      data-original-badge="${escapeHtml(item.badge)}"
-      data-original-badge-type="${escapeHtml(item.badgeType || "info")}"
+      data-original-badge="${escapeHtml(originalDueBadge.label)}"
+      data-original-badge-type="${escapeHtml(originalDueBadge.type)}"
     >
       <span class="course-item__icon course-item__icon--clipboard" aria-hidden="true"></span>
       <a class="course-item__title course-item__link" href="${href}">${escapeHtml(item.title)}</a>
-      <span class="badge badge--${badgeType}">${escapeHtml(badge)}</span>
-      <span class="course-item__due">Due<br />${escapeHtml(item.due)}</span>
+      <span class="badge badge--${dueBadge.type}">${escapeHtml(dueBadge.label)}</span>
+      <span class="course-item__due">Due<br />${escapeHtml(formatAssessmentDate(item.dueDate))}</span>
     </li>
   `;
 }
 
 function renderContents(week) {
-  const hasAssessments = week.assessments.length > 0;
+  const hasAssessments = assessments.some((assessment) => assessment.week === week.number);
 
   return `
     <section
@@ -121,4 +129,8 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function compareAssessmentsByDueDate(firstAssessment, secondAssessment) {
+  return new Date(firstAssessment.dueDate) - new Date(secondAssessment.dueDate);
 }

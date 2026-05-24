@@ -69,16 +69,25 @@
 .course-item__icon::before {
   content: "";
   display: block;
-  width: 0.8rem;
-  height: 0.8rem;
-  border: 0.125rem solid #8c5ce8;
-  border-radius: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--color-primary);
+  mask-image: url("../../assets/icons/note.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.course-item__icon--clipboard::before {
+  mask-image: url("../../assets/icons/clipboard-text.svg");
+}
+
+.course-item__icon--document::before {
+  mask-image: url("../../assets/icons/note.svg");
 }
 
 .course-item__icon--video::before {
-  width: 0.9rem;
-  height: 0.65rem;
-  border-radius: 0.15rem;
+  mask-image: url("../../assets/icons/video.svg");
 }
 
 .course-item__title {

@@ -59,12 +59,21 @@
   display: block;
   width: 1rem;
   height: 1rem;
-  border: 0.125rem solid var(--color-text);
-  border-radius: 0.15rem;
+  background-color: var(--color-text);
+  mask-image: url("../../assets/icons/calendar-dots.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.assignment-details__icon--calendar::before {
+  mask-image: url("../../assets/icons/calendar-dots.svg");
+}
+
+.assignment-details__icon--attempts::before {
+  mask-image: url("../../assets/icons/check-square-offset.svg");
 }
 
 .assignment-details__icon--marks::before {
-  width: 0.95rem;
-  height: 0.95rem;
-  transform: rotate(45deg);
+  mask-image: url("../../assets/icons/star.svg");
 }

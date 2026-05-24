@@ -1,6 +1,9 @@
+import { assessments } from "../data/assessments.js";
+import { formatAssessmentDate, getDueBadge } from "./assessment-format.js";
 import { getCompletedAssessmentIds } from "./completion-store.js";
 
 export function initTasks() {
+  renderTodoList();
   const todoCards = document.querySelectorAll(".todo-card");
 
   applyStoredAssessmentCompletions();
@@ -33,12 +36,51 @@ export function initTasks() {
   syncAllCourseAssessments();
 }
 
+function renderTodoList() {
+  const todoList = document.querySelector('[data-component="todo-list"]');
+
+  if (!todoList) {
+    return;
+  }
+
+  todoList.innerHTML = [...assessments].sort(compareAssessmentsByDueDate).map(renderTodoCard).join("");
+}
+
+function renderTodoCard(assessment) {
+  const isComplete = assessment.completed || isStoredComplete(assessment.id);
+  const dueBadge = getDueBadge(assessment, isComplete);
+  const originalDueBadge = getDueBadge({ ...assessment, completed: false }, false);
+  const completeClass = isComplete ? " todo-card--complete" : "";
+
+  return `
+    <li
+      class="todo-card${completeClass}"
+      data-todo-id="${assessment.id}"
+      data-assessment-id="${assessment.id}"
+      data-original-badge="${escapeHtml(originalDueBadge.label)}"
+      data-original-badge-type="${escapeHtml(originalDueBadge.type)}"
+    >
+      <span class="todo-card__status" aria-hidden="true"></span>
+      <a class="todo-card__content" href="assessment.html?id=${encodeURIComponent(assessment.id)}">
+        <strong>${escapeHtml(assessment.title)}</strong>
+        <span>Due Week ${assessment.dueWeek}</span>
+        <span>${escapeHtml(formatAssessmentDate(assessment.dueDate))}</span>
+      </a>
+      <span class="badge badge--${dueBadge.type}">${escapeHtml(dueBadge.label)}</span>
+    </li>
+  `;
+}
+
 function applyStoredAssessmentCompletions() {
   getCompletedAssessmentIds().forEach((assessmentId) => {
     getTaskCards(assessmentId).forEach((card) => {
       card.classList.add("todo-card--complete");
     });
   });
+}
+
+function isStoredComplete(assessmentId) {
+  return getCompletedAssessmentIds().includes(assessmentId);
 }
 
 function updateTaskAccessibility(card) {
@@ -58,9 +100,24 @@ function updateTaskAccessibility(card) {
 
 function setTaskCompletion(card, isComplete) {
   card.classList.toggle("todo-card--complete", isComplete);
+  updateTaskBadge(card, isComplete);
   updateTaskAccessibility(card);
   syncAssessmentGroup(card.dataset.assessmentId);
   document.querySelectorAll(".todo__list").forEach(reorderTasks);
+}
+
+function updateTaskBadge(card, isComplete) {
+  const badge = card.querySelector(".badge");
+
+  if (!badge) {
+    return;
+  }
+
+  const originalBadge = card.dataset.originalBadge || "";
+  const originalBadgeType = card.dataset.originalBadgeType || "info";
+
+  badge.className = `badge badge--${isComplete ? "success" : originalBadgeType}`;
+  badge.textContent = isComplete ? "Completed" : originalBadge;
 }
 
 function syncAllCourseAssessments() {
@@ -123,4 +180,17 @@ function reorderTasks(list) {
   const completeCards = cards.filter((card) => card.classList.contains("todo-card--complete"));
 
   [...incompleteCards, ...completeCards].forEach((card) => list.append(card));
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function compareAssessmentsByDueDate(firstAssessment, secondAssessment) {
+  return new Date(firstAssessment.dueDate) - new Date(secondAssessment.dueDate);
 }
