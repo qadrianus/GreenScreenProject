@@ -60,6 +60,10 @@
   padding: 1.75rem;
 }
 
+.accordion__panel[hidden] {
+  display: none;
+}
+
 .accordion__empty {
   color: var(--color-text-muted);
 }

@@ -8,3 +8,40 @@
   background: transparent;
   color: inherit;
 }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.5rem;
+  border: 0.0625rem solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.button:focus-visible {
+  outline: 0.1875rem solid var(--color-purple-border);
+  outline-offset: 0.1875rem;
+}
+
+.button--secondary {
+  border-color: var(--color-text);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.button--primary {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-bg-secondary);
+}
+
+.button--disabled,
+.button:disabled {
+  border-color: #c9c9c9;
+  background: #c9c9c9;
+  color: #9a9a9a;
+  cursor: not-allowed;
+}

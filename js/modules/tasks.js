@@ -1,18 +1,27 @@
+import { getCompletedAssessmentIds } from "./completion-store.js";
+
 export function initTasks() {
   const todoCards = document.querySelectorAll(".todo-card");
 
+  applyStoredAssessmentCompletions();
+
   todoCards.forEach((card) => {
-    card.setAttribute("role", "button");
-    card.setAttribute("tabindex", "0");
     updateTaskAccessibility(card);
 
+    const status = card.querySelector(".todo-card__status");
     const toggleCard = () => {
       const shouldComplete = !card.classList.contains("todo-card--complete");
       setTaskCompletion(card, shouldComplete);
     };
 
-    card.addEventListener("click", toggleCard);
-    card.addEventListener("keydown", (event) => {
+    if (!status) {
+      return;
+    }
+
+    status.setAttribute("role", "button");
+    status.setAttribute("tabindex", "0");
+    status.addEventListener("click", toggleCard);
+    status.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         toggleCard();
@@ -24,13 +33,27 @@ export function initTasks() {
   syncAllCourseAssessments();
 }
 
+function applyStoredAssessmentCompletions() {
+  getCompletedAssessmentIds().forEach((assessmentId) => {
+    getTaskCards(assessmentId).forEach((card) => {
+      card.classList.add("todo-card--complete");
+    });
+  });
+}
+
 function updateTaskAccessibility(card) {
   const isComplete = card.classList.contains("todo-card--complete");
   const title = card.querySelector(".todo-card__content strong")?.textContent?.trim() || "task";
   const state = isComplete ? "incomplete" : "complete";
+  const status = card.querySelector(".todo-card__status");
 
-  card.setAttribute("aria-pressed", String(isComplete));
-  card.setAttribute("aria-label", `Mark ${title} as ${state}`);
+  if (!status) {
+    return;
+  }
+
+  status.removeAttribute("aria-hidden");
+  status.setAttribute("aria-pressed", String(isComplete));
+  status.setAttribute("aria-label", `Mark ${title} as ${state}`);
 }
 
 function setTaskCompletion(card, isComplete) {

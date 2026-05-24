@@ -1,0 +1,70 @@
+.assignment-details {
+  padding: 1.5rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.assignment-details h2 {
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+  font-size: var(--font-size-h3);
+}
+
+.assignment-details__list {
+  margin: 0;
+}
+
+.assignment-details__item {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.assignment-details__item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.assignment-details__item dt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+}
+
+.assignment-details__item dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.assignment-details__item--due dd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.assignment-details__icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.assignment-details__icon::before {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.125rem solid var(--color-text);
+  border-radius: 0.15rem;
+}
+
+.assignment-details__icon--marks::before {
+  width: 0.95rem;
+  height: 0.95rem;
+  transform: rotate(45deg);
+}

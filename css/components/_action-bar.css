@@ -1,0 +1,29 @@
+.action-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.25rem 2rem;
+  border-top: 0.0625rem solid var(--color-border-soft);
+  background: var(--color-bg-secondary);
+  box-shadow: 0 -0.5rem 1.5rem rgba(18, 18, 18, 0.08);
+}
+
+.action-bar .button {
+  min-width: 11rem;
+}
+
+@media (max-width: 36rem) {
+  .action-bar {
+    padding: 1rem;
+  }
+
+  .action-bar .button {
+    flex: 1;
+    min-width: 0;
+  }
+}

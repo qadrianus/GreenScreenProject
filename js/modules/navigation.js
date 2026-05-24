@@ -3,7 +3,9 @@ export function initNavigation() {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
-      event.preventDefault();
+      if (link.getAttribute("href") === "#") {
+        event.preventDefault();
+      }
 
       navLinks.forEach((item) => item.classList.remove("course-nav__link--active"));
       link.classList.add("course-nav__link--active");

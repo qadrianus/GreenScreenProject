@@ -9,6 +9,10 @@
 @import url("components/_badge.css");
 @import url("components/_course-item.css");
 @import url("components/_assessment-tracker.css");
+@import url("components/_assignment-details.css");
 @import url("components/_calendar.css");
+@import url("components/_submission-upload.css");
 @import url("components/_todo.css");
+@import url("components/_action-bar.css");
 @import url("pages/_index.css");
+@import url("pages/_assessment.css");
