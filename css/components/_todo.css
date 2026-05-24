@@ -1,0 +1,62 @@
+.todo__list {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.todo-card {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+  gap: 0.875rem;
+  align-items: center;
+  padding: 0.875rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  transition: background-color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.todo-card[role="button"] {
+  cursor: pointer;
+}
+
+.todo-card[role="button"]:focus-visible {
+  outline: 0.1875rem solid var(--color-purple-border);
+  outline-offset: 0.1875rem;
+}
+
+.todo-card__content {
+  display: grid;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.todo-card__content strong {
+  color: var(--color-text);
+  font-size: 0.875rem;
+}
+
+.todo-card--complete {
+  border-color: #d9f7be;
+  background: var(--color-success-muted);
+}
+
+.todo-card--complete .todo-card__content,
+.todo-card--complete .todo-card__content strong {
+  color: var(--color-success-dark);
+}
+
+.todo-card--complete .badge {
+  display: none;
+}
+
+@media (max-width: 26rem) {
+  .todo-card {
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+  }
+
+  .todo-card .badge {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

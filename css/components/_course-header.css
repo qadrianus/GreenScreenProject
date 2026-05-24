@@ -1,0 +1,22 @@
+.course-hero {
+  background: var(--color-primary);
+  color: var(--color-bg-secondary);
+}
+
+.course-hero__inner {
+  width: min(100%, var(--page-max-width));
+  margin: 0 auto;
+  padding: 4rem 3.5rem 4.25rem;
+}
+
+.course-hero p {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 48rem) {
+  .course-hero__inner {
+    padding: 3rem 1.25rem;
+  }
+}

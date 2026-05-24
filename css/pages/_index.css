@@ -1,0 +1,15 @@
+.course-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.course-content > h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-text);
+}
+
+@media (max-width: 48rem) {
+  .course-content {
+    gap: 1.5rem;
+  }
+}

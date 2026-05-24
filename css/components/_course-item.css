@@ -1,0 +1,105 @@
+.content-section {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.content-section + .content-section {
+  margin-top: 2rem;
+}
+
+.content-section--divided {
+  padding-top: 2rem;
+  border-top: 0.0625rem solid var(--color-border-soft);
+}
+
+.content-section h4 {
+  font-size: var(--font-size-h4);
+}
+
+.item-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.course-item {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 0.875rem;
+  align-items: center;
+  min-height: 2.125rem;
+}
+
+.course-item--assessment {
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto minmax(8rem, 11rem);
+}
+
+.todo-card__status {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+}
+
+.todo-card--complete .todo-card__status {
+  border-color: var(--color-success-dark);
+  background: var(--color-success-muted);
+}
+
+.todo-card--complete .todo-card__status::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.35rem;
+  border-bottom: 0.125rem solid var(--color-success-dark);
+  border-left: 0.125rem solid var(--color-success-dark);
+  transform: rotate(-45deg) translateY(-0.05rem);
+}
+
+.course-item__icon {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-secondary);
+}
+
+.course-item__icon::before {
+  content: "";
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 0.125rem solid #8c5ce8;
+  border-radius: 0.15rem;
+}
+
+.course-item__icon--video::before {
+  width: 0.9rem;
+  height: 0.65rem;
+  border-radius: 0.15rem;
+}
+
+.course-item__title {
+  font-weight: 500;
+}
+
+.course-item__due {
+  color: var(--color-text);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 48rem) {
+  .course-item,
+  .course-item--assessment {
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+  }
+
+  .course-item .badge,
+  .course-item__due {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
